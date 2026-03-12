@@ -62,7 +62,7 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
                 padding: const EdgeInsets.all(24.0),
                 child: GlassmorphicContainer(
                   width: double.infinity,
-                  height: 450,
+                  height: 520, // Increased from 500 to prevent overflow
                   borderRadius: 20,
                   blur: 20,
                   alignment: Alignment.bottomCenter,

@@ -10,7 +10,7 @@ class AuthService {
   AuthService({this.baseUrl = AppConstants.baseUrl});
 
   Future<String?> login(String email, String password) async {
-    final url = Uri.parse('$baseUrl/auth/login');
+    final url = Uri.parse('$baseUrl/api/auth/login');
     try {
       final response = await http.post(
         url,
@@ -31,13 +31,18 @@ class AuthService {
     }
   }
 
-  Future<void> register(String name, String email, String password) async {
-    final url = Uri.parse('$baseUrl/auth/register');
+  Future<void> register(String name, String email, String password, String jobRole) async {
+    final url = Uri.parse('$baseUrl/api/auth/register');
     try {
       final response = await http.post(
         url,
         headers: {'Content-Type': 'application/json'},
-        body: jsonEncode({'name': name, 'email': email, 'password': password}),
+        body: jsonEncode({
+          'full_name': name,
+          'email': email,
+          'password': password,
+          'job_role': jobRole,
+        }),
       );
 
       if (response.statusCode != 200 && response.statusCode != 201) {

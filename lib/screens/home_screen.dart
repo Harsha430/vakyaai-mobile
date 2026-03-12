@@ -5,6 +5,7 @@ import '../providers/analysis_provider.dart';
 import '../widgets/pitch_input.dart';
 import 'dashboard_screen.dart';
 import 'error_screen.dart';
+import 'library_screen.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import '../core/constants.dart';
 
@@ -17,13 +18,18 @@ class HomeScreen extends ConsumerWidget {
 
     // Navigate to result screen when analysis is ready
     ref.listen(analysisProvider, (previous, next) {
+      print('👂 [HOME] State changed! isLoading: ${next.isLoading}, hasAnalysis: ${next.analysis != null}, hasError: ${next.errorMessage != null}');
+      
       if (next.analysis != null && !next.isLoading) {
+        print('🚀 [HOME] Navigating to DashboardScreen...');
         Navigator.push(
           context,
           MaterialPageRoute(builder: (context) => const DashboardScreen()),
         );
+        print('✅ [HOME] Navigation initiated');
       }
       if (next.errorMessage != null) {
+        print('⚠️ [HOME] Error detected: ${next.errorMessage}');
         if (next.errorType == ErrorType.validation) {
           ScaffoldMessenger.of(context).showSnackBar(
             SnackBar(
@@ -48,6 +54,23 @@ class HomeScreen extends ConsumerWidget {
     });
 
     return Scaffold(
+      extendBodyBehindAppBar: true,
+      appBar: AppBar(
+        backgroundColor: Colors.transparent,
+        elevation: 0,
+        actions: [
+          IconButton(
+            icon: const Icon(Icons.history_edu, color: Color(AppConstants.accentHex)),
+            onPressed: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => const LibraryScreen()),
+              );
+            },
+          ),
+          const SizedBox(width: 8),
+        ],
+      ),
       body: SafeArea(
         child: Stack(
           children: [

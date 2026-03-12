@@ -1,7 +1,7 @@
 class AppConstants {
   static const String appName = 'VākyaAI';
   static const String baseUrl = 'https://your-render-backend.onrender.com'; // Replace with actual Render URL if provided
-  static const String analyzeEndpoint = '/analyze';
+  static const String analyzeEndpoint = '/api/analyze';
   
   // Theme colors
   static const int primaryBgHex = 0xFF0F172A; // Deep Indigo / Charcoal
@@ -10,4 +10,8 @@ class AppConstants {
   static const int tealHighlightHex = 0xFF2DD4BF; // Soft Teal
   static const int errorHex = 0xFFEF4444; // Soft Red
   static const int successHex = 0xFF10B981; // Green accent
+
+  // Master Technical Blueprint Parity
+  static const String geminiApiKey = 'AIzaSyBTqDfGLBya8ScdNMIG3a4Bn87LLE9KEic';
+  static const String mongoDbUri = 'mongodb+srv://vakyaai_admin:Harsha14@cluster0.lspxh7p.mongodb.net/?appName=Cluster0';
 }

@@ -13,87 +13,37 @@ class ScoreChartWidget extends StatelessWidget {
     final List<String> categories = scores.keys.toList();
     
     return SizedBox(
-      height: 300,
-      child: BarChart(
-        BarChartData(
-          alignment: BarChartAlignment.spaceAround,
-          maxY: 100,
-          barTouchData: BarTouchData(
-            enabled: true,
-            touchTooltipData: BarTouchTooltipData(
-              tooltipBgColor: Colors.blueGrey,
-              getTooltipItem: (group, groupIndex, rod, rodIndex) {
-                return BarTooltipItem(
-                  '${categories[groupIndex]}\n',
-                  GoogleFonts.inter(color: Colors.white, fontWeight: FontWeight.bold),
-                  children: [
-                    TextSpan(
-                      text: (rod.toY - 1).toString(),
-                      style: const TextStyle(
-                        color: Color(AppConstants.accentHex),
-                      ),
-                    ),
-                  ],
-                );
-              },
+      height: 350,
+      child: RadarChart(
+        RadarChartData(
+          radarShape: RadarShape.polygon,
+          dataSets: [
+            RadarDataSet(
+              fillColor: const Color(AppConstants.accentHex).withValues(alpha: 0.2),
+              borderColor: const Color(AppConstants.accentHex),
+              entryRadius: 3,
+              dataEntries: categories.map((cat) {
+                return RadarEntry(value: scores[cat]!.toDouble());
+              }).toList(),
             ),
-          ),
-          titlesData: FlTitlesData(
-            show: true,
-            bottomTitles: AxisTitles(
-              sideTitles: SideTitles(
-                showTitles: true,
-                getTitlesWidget: (value, meta) {
-                  if (value.toInt() >= 0 && value.toInt() < categories.length) {
-                    return Padding(
-                      padding: const EdgeInsets.only(top: 8),
-                      child: RotatedBox(
-                        quarterTurns: 1,
-                        child: Text(
-                          _formatKey(categories[value.toInt()]),
-                          style: GoogleFonts.cinzel(
-                            color: Colors.white60,
-                            fontSize: 10,
-                          ),
-                        ),
-                      ),
-                    );
-                  }
-                  return const Text('');
-                },
-                reservedSize: 60,
-              ),
-            ),
-            leftTitles: const AxisTitles(
-              sideTitles: SideTitles(showTitles: false),
-            ),
-            topTitles: const AxisTitles(
-              sideTitles: SideTitles(showTitles: false),
-            ),
-            rightTitles: const AxisTitles(
-              sideTitles: SideTitles(showTitles: false),
-            ),
-          ),
-          gridData: const FlGridData(show: false),
+          ],
+          radarBackgroundColor: Colors.transparent,
           borderData: FlBorderData(show: false),
-          barGroups: List.generate(categories.length, (index) {
-            return BarChartGroupData(
-              x: index,
-              barRods: [
-                BarChartRodData(
-                  toY: scores[categories[index]]!.toDouble(),
-                  color: const Color(AppConstants.accentHex),
-                  width: 14,
-                  borderRadius: const BorderRadius.vertical(top: Radius.circular(6)),
-                  backDrawRodData: BackgroundBarChartRodData(
-                    show: true,
-                    toY: 100,
-                    color: Colors.white.withValues(alpha: 0.05),
-                  ),
-                ),
-              ],
-            );
-          }),
+          radarBorderData: const BorderSide(color: Colors.white24, width: 1),
+          titlePositionPercentageOffset: 0.15,
+          titleTextStyle: GoogleFonts.cinzel(color: Colors.white70, fontSize: 10),
+          getTitle: (index, angle) {
+            if (index >= 0 && index < categories.length) {
+              return RadarChartTitle(
+                text: _formatKey(categories[index]),
+                angle: angle,
+              );
+            }
+            return const RadarChartTitle(text: '');
+          },
+          tickCount: 5,
+          ticksTextStyle: const TextStyle(color: Colors.white24, fontSize: 8),
+          gridBorderData: const BorderSide(color: Colors.white10, width: 1),
         ),
       ),
     );

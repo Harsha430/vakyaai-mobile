@@ -1,0 +1,73 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@font-face {
+  font-family: 'Cinzel';
+  src: url('./assets/fonts/Cinzel-VariableFont_wght.ttf') format('truetype');
+  font-weight: 100 900;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Google Sans';
+  src: url('./assets/fonts/GoogleSansFlex-VariableFont_GRAD,ROND,opsz,slnt,wdth,wght.ttf') format('truetype');
+  font-weight: 100 900;
+  font-display: swap;
+}
+
+body {
+  @apply bg-primary text-parchment font-body;
+  background-image: url('https://www.transparenttextures.com/patterns/stardust.png'); /* Subtle grain */
+  background-attachment: fixed;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  @apply font-heading text-accent;
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  @apply bg-primary-light;
+}
+
+::-webkit-scrollbar-thumb {
+  @apply bg-accent rounded-full;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  @apply bg-accent-glow;
+}
+
+.manuscript-container {
+    @apply bg-primary-light/40 backdrop-blur-md border border-accent/20 rounded-3xl p-8 shadow-[0_0_50px_rgba(0,0,0,0.3)] relative overflow-hidden transition-all duration-500;
+}
+
+.manuscript-container:focus-within {
+    @apply border-accent/40 shadow-[0_0_60px_rgba(234,179,8,0.1)];
+}
+
+.glass-card {
+    @apply bg-white/5 backdrop-blur-xl border border-white/10 shadow-2xl;
+}
+
+.glass-input {
+    @apply bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-parchment placeholder:text-parchment/20 focus:outline-none focus:border-accent/40 focus:ring-1 focus:ring-accent/40 transition-all;
+}
+
+.accent-glow {
+    text-shadow: 0 0 20px rgba(234, 179, 8, 0.4);
+}
+
+.manuscript-container::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
+    pointer-events: none;
+    background: radial-gradient(circle at top right, rgba(234, 179, 8, 0.05), transparent 70%);
+}
+

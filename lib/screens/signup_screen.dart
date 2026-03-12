@@ -16,12 +16,14 @@ class _SignupScreenState extends ConsumerState<SignupScreen> {
   final _nameController = TextEditingController();
   final _emailController = TextEditingController();
   final _passwordController = TextEditingController();
+  final _roleController = TextEditingController();
 
   @override
   void dispose() {
     _nameController.dispose();
     _emailController.dispose();
     _passwordController.dispose();
+    _roleController.dispose();
     super.dispose();
   }
 
@@ -53,7 +55,7 @@ class _SignupScreenState extends ConsumerState<SignupScreen> {
                 padding: const EdgeInsets.all(24.0),
                 child: GlassmorphicContainer(
                   width: double.infinity,
-                  height: 520,
+                  height: 650, // Increased from 600 for extra comfort
                   borderRadius: 20,
                   blur: 20,
                   alignment: Alignment.bottomCenter,
@@ -124,6 +126,15 @@ class _SignupScreenState extends ConsumerState<SignupScreen> {
                             prefixIcon: Icon(Icons.lock_outline, color: Color(AppConstants.accentHex)),
                           ),
                         ),
+                        const SizedBox(height: 16),
+                        TextField(
+                          controller: _roleController,
+                          style: GoogleFonts.inter(color: Colors.white),
+                          decoration: const InputDecoration(
+                            labelText: 'JOB ROLE',
+                            prefixIcon: Icon(Icons.work_outline, color: Color(AppConstants.accentHex)),
+                          ),
+                        ),
                         const SizedBox(height: 32),
                         SizedBox(
                           width: double.infinity,
@@ -136,6 +147,7 @@ class _SignupScreenState extends ConsumerState<SignupScreen> {
                                       _nameController.text,
                                       _emailController.text,
                                       _passwordController.text,
+                                      _roleController.text,
                                     );
                                     if (context.mounted && authState.errorMessage == null) {
                                       ScaffoldMessenger.of(context).showSnackBar(

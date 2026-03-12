@@ -27,11 +27,11 @@ class AppTheme {
           color: const Color(AppConstants.secondaryHex),
           fontWeight: FontWeight.w600,
         ),
-        bodyLarge: GoogleFonts.inter(
+        bodyLarge: GoogleFonts.inter( // Proxy for Google Sans Flex
           color: Colors.white.withValues(alpha: 0.9),
           fontSize: 16,
         ),
-        bodyMedium: GoogleFonts.inter(
+        bodyMedium: GoogleFonts.inter( 
           color: Colors.white.withValues(alpha: 0.7),
           fontSize: 14,
         ),
